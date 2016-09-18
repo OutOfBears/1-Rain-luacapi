@@ -8,9 +8,11 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 LocalPlayer.Chatted:connect(function(p)
-  if p:sub(1, 5) == "!exe " then
-    local f, e = loadstring(p:sub(6))
-    assert(f, e)
+  p = p:match("^/e%s(.+") or p
+  local cmd, args = p:match("!(.-)%s(.+)")
+  if if cmd and args and cmd == "exe" then
+    local f, e = loadstring(args)
+    asset(f, e)
     pcall(f)
   end
 end)
